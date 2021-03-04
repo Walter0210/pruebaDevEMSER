@@ -1,4 +1,5 @@
 import logging
+logging.basicConfig(filename="logger.txt", level=logging.DEBUG)
 
 def operacion(flag):
     strRes = False
@@ -7,17 +8,17 @@ def operacion(flag):
         b = float(input('Ingrese otro numero: '))
         if flag:
             res = a + b
-            strRes = ('\n\t' + str(a) + ' + ' + str(b) + ' = ' + str(res))
+            strRes = ('\t' + str(a) + ' + ' + str(b) + ' = ' + str(res))
             
         else:
             res = a - b
-            strRes = ('\n\t' + str(a) + ' - ' + str(b) + ' = ' + str(res))
+            strRes = ('\t' + str(a) + ' - ' + str(b) + ' = ' + str(res))
     except:
-        print('\n\tIngrese solo valores numéricos!\n\n')
+        logging.warning('La operación necesita valores numéricos.')
     finally:
         return strRes
 
-log = open("logger.txt", "w")
+#log = open("logger.txt", "w")
 while True:
     
     print('\n.::Menú principal::.')
@@ -29,32 +30,29 @@ while True:
         op = int(input('\tSeleccione una opción: '))
 
         if op == 1:
-            print("\t\nSuma de dos números:")
+            print("\t\nSuma de dos números: ")
             sum = operacion(True)
             if sum != False:
-                log = open("logger.txt", "a")
                 print(sum)
-                log.write(sum)
-                log.close()
+                logging.info(sum)
             
             
         elif op == 2:
-            print("\t\nResta de dos números:")
+            print("\t\nResta de dos números: ")
             rest = operacion(False)
             if rest != False:
-                log = open("logger.txt", "a")
                 print(rest)
-                log.write(rest)
-                log.close()
+                logging.info(rest)
 
         elif op == 3:    
-            print("\t\nRegistro de operaciones:")
+            print("\t\nRegistro de operaciones: ")
             log = open("logger.txt", "r")   
             print(log.read())
             log.close()
 
         elif op == 4:
-            print("Gracias! nos vemos!")
+            print("Gracias!")
+            logging.info("Salió del script.")
             break
     except:
-        print('Seleccione una opcion valida!')
+        logging.warning('Seleccionó una opción de menú inválida.')
