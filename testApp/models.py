@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
-class Pagina1(models.Model):
+class Model1(models.Model):
     autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=200)
     text = models.TextField()

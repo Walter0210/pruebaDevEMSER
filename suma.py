@@ -1,3 +1,4 @@
+import logging
 
 def operacion(flag):
     strRes = False
