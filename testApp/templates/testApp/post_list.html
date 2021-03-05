@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Hello there!</p>
+    <h1>Hello there!</h1>
+    {%for model in modelos%}
+    <h4>publicado el: {{model.fechaPubli}}</h4>
+    <h2>{{model.titulo}}</h2>
+    <p>{{model.text}}</p>
+    {%endfor%}
 </body>
 </html>
