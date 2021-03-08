@@ -6,4 +6,4 @@ class Model1Form(forms.ModelForm):
 
     class Meta:
         model = Model1
-        fields = ('titulo', 'text', )
+        fields = ('titulo', 'text')

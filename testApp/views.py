@@ -4,6 +4,7 @@ from .models import Model1
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from .forms import Model1Form
+from django.shortcuts import redirect
 
 
 # RestFramework
@@ -14,7 +15,16 @@ from .serializers import ModelSerializer
 
 
 def new_model(request):
-    form = Model1Form()
+    if request.method == "POST":
+        form = Model1Form(request.POST)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.autor = request.user
+            model.fechaPubli = timezone.now()
+            model.save()
+            return redirect('detalle_modelo', pk=model.pk)
+    else:
+        form = Model1Form()
     return render(request, 'testApp/edit_modelo.html', {'form': form})
 
 
@@ -24,7 +34,7 @@ def detalle_modelo(request, pk):
 
 
 def post_list(request):
-    usuarios = User.objects.all()
+    # usuarios = User.objects.all()
     modelos = Model1.objects.all()
     return render(request, 'testApp/post_list.html', {'modelos': modelos})
 
