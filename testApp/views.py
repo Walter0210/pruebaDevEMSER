@@ -2,12 +2,18 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Model1
 from django.contrib.auth.models import User
+from django.shortcuts import render, get_object_or_404
+
+
+#RestFramework
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from .serializers import ModelSerializer
 
+def detalle_modelo(request, pk):
+    post = get_object_or_404(Model1, pk=pk)
+    return render(request, 'testApp/detalle_modelo.html', {'post': post})
 
 def post_list(request):
     usuarios = User.objects.all()

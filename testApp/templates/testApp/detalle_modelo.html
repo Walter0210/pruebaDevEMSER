@@ -1,0 +1,13 @@
+{% extends 'testApp/base.html' %}
+
+{% block content %}
+    <article class="post">
+        {% if model.fechaPubli %}
+            <time class="date">
+                {{ model.fechaPubli }}
+            </time>
+        {% endif %}
+        <h2>{{ model.titulo }}</h2>
+        <p>{{ model.text|linebreaksbr }}</p>
+    </article>
+{% endblock %}
