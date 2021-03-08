@@ -14,6 +14,21 @@ from rest_framework.views import APIView
 from .serializers import ModelSerializer
 
 
+def edit_modelo(request, pk):
+    model = get_object_or_404(Model1, pk=pk)
+    if request.method == "POST":
+        form = Model1Form(request.POST, instance=model)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.autor = request.user
+            model.fechaPubli = timezone.now()
+            model.save()
+            return redirect('detalle_modelo', pk=model.pk)
+    else:
+        form = Model1Form(instance=model)
+    return render(request, 'testApp/edit_modelo.html', {'form': form})
+
+
 def new_model(request):
     if request.method == "POST":
         form = Model1Form(request.POST)
