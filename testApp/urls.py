@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.post_list, name = 'post_list'),
     path('api/', views.TestView.as_view(), name = 'test'),
     path('post/<int:pk>/', views.detalle_modelo, name='detalle_modelo'),
+    path('model/new/', views.new_model, name='new_model'),
 
 ]
