@@ -7,5 +7,5 @@ urlpatterns = [
     path('model/<int:pk>/', views.detalle_modelo, name='detalle_modelo'),
     path('model/new/', views.new_model, name='new_model'),
     path('model/<int:pk>/edit/', views.edit_modelo, name='edit_modelo'),
-
+    path('articulos/', views.nuevoArt, name='nuevoArt')
 ]

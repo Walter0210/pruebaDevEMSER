@@ -3,12 +3,12 @@ from django.utils import timezone
 from .models import Model1
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
-from .forms import Model1Form
+from .forms import Model1Form, ArticuloForm
 from django.shortcuts import redirect
 
 
 # RestFramework
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import ModelSerializer
@@ -67,9 +67,15 @@ class TestView(APIView):
             return Response(serializer.data)
 
 
-# def test_view(request):
-#     datos = {
-#         'name': 'Walter',
-#         'age': 25
-#     }
-#     return JsonResponse(datos)
+def nuevoArt(request):
+    if request.method == "POST":
+        response = FileResponse(open('articulo.txt', 'rb'))
+        form = ArticuloForm(request.POST)
+        if form.is_valid():
+            art = form.save(commit=False)
+            art.save()
+            
+            return redirect('/articulos/', pk=art.pk)
+    else:
+        form = ArticuloForm()
+    return render(request, 'testApp/editArt.html', {'form': form})
